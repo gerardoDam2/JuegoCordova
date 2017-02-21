@@ -10,6 +10,7 @@ var app = {
 
 app.initialize();
 
+
 // variables
 var acelerometro;
 var canvas = document.getElementById("myCanvas");
@@ -31,6 +32,7 @@ var paddleWidth = 75;
 var paddleHeight = 10;
 var paddleX = (canvas.width - paddleWidth) / 2;
 
+var lifes= 3;
 
 function initApp() {
     acelerometro = navigator.accelerometer.watchAcceleration(onAcelerometroCall, failure, {
@@ -54,20 +56,43 @@ function drawPaddle() {
     ctx.closePath();
 }
 
-function onAcelerometroCall(acelerometroValue) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawBall();
-    drawPaddle();
+function drawLifes(){
+ctx.font = canvas.width+"px Arial";
+ctx.textAlign="center";
+ctx.fillText(lifes,canvas.width/2,canvas.height/2);
+}
 
+
+
+function gameOver(){
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.font = "100px Arial";
+  ctx.textAlign="center";
+  ctx.fillText("Game Over",canvas.width/2,30);
+
+}
+
+
+function onAcelerometroCall(acelerometroValue) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawBall();
+  drawPaddle();
+  drawLifes();
     if ((y + dy) < ballRadius) {
         dy = -dy;
     } else if ((y + dy) > canvas.height - ballRadius) {
         if (x > paddleX && x < paddleX + paddleWidth) {
             dy = -dy;
         } else {
-          alert("GAME OVER");
+          lifes-=1;
           x=1+ballRadius;
           y=1+ballRadius;
+          if (lifes==0) {
+            lifes=3;
+            gameOver();
+
+          }
+
         }
     }
     if (((x + dx) > canvas.width - ballRadius) || ((x + dx) < ballRadius)) {
