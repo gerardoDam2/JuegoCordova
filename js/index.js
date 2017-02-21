@@ -10,31 +10,31 @@ var app = {
 
 app.initialize();
 
+// variables
+var acelerometro;
+var canvas = document.getElementById("myCanvas");
+canvas.width = window.screen.width - 10;
+canvas.height = window.screen.height - 60;
+var ctx = canvas.getContext("2d");
 
+//cordenadas de la bola
+var x = canvas.width / 2;
+var y = 20;
+
+//direccion de la bola
+var dx = 2;
+var dy = -2;
+
+var ballRadius = 10;
+
+var paddleWidth = 75;
+var paddleHeight = 10;
+var paddleX = (canvas.width - paddleWidth) / 2;
 
 
 function initApp() {
 
-    // variables
-    var acelerometro;
-    var canvas = document.getElementById("myCanvas");
-    canvas.width = window.screen.width - 10;
-    canvas.height = window.screen.height - 60;
-    var ctx = canvas.getContext("2d");
 
-    //cordenadas de la bola
-    var x = canvas.width / 2;
-    var y = 20;
-
-    //direccion de la bola
-    var dx = 2;
-    var dy = -2;
-
-    var ballRadius = 10;
-
-    var paddleWidth = 75;
-    var paddleHeight = 10;
-    var paddleX = (canvas.width - paddleWidth) / 2;
 
     acelerometro = navigator.accelerometer.watchAcceleration(onAcelerometroCall, failure, {
         frequency: 10
