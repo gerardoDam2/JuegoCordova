@@ -60,14 +60,16 @@ function onAcelerometroCall(acelerometroValue) {
     if (((x + dx) > canvas.width - ballRadius) || ((x + dx) < ballRadius)) {
         dx = -dx;
     }
-    if ( paddleX >= 0 && paddleX <= canvas.width - paddleWidth) {
-        paddleX += -1*(acelerometroValue.x*1.5);
+    if ( acelerometroValue.x >0 && paddleX > 0) {
+        paddleX += -1*(acelerometroValue.x*1.2);
+    }else if(acelerometroValue.x <0 && paddleX < canvas.width-paddleWidth) {
+        paddleX -= (acelerometroValue.x*1.2);
     }
     x += dx;
     y += dy;
 }
 
-//
+
 
 function drawBall() {
     ctx.beginPath();
