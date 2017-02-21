@@ -66,8 +66,8 @@ function onAcelerometroCall(acelerometroValue) {
             dy = -dy;
         } else {
           alert("GAME OVER");
-          x=1;
-          y=1;
+          x=1+ballRadius;
+          y=1+ballRadius;
         }
     }
     if (((x + dx) > canvas.width - ballRadius) || ((x + dx) < ballRadius)) {
