@@ -33,9 +33,6 @@ var paddleX = (canvas.width - paddleWidth) / 2;
 
 
 function initApp() {
-
-
-
     acelerometro = navigator.accelerometer.watchAcceleration(onAcelerometroCall, failure, {
         frequency: 10
     });
@@ -68,8 +65,9 @@ function onAcelerometroCall(acelerometroValue) {
         if (x > paddleX && x < paddleX + paddleWidth) {
             dy = -dy;
         } else {
-            alert("GAME OVER");
-            document.location.reload();
+          alert("GAME OVER");
+          x=1;
+          y=1;
         }
     }
     if (((x + dx) > canvas.width - ballRadius) || ((x + dx) < ballRadius)) {
