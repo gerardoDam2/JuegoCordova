@@ -9,7 +9,6 @@ var app = {
         document.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
         screen.lockOrientation('portrait');
   //      document.addEventListener("pause", onAppClose, false);
-        window.plugins.insomnia.keepAwake();
     }
 };
 
@@ -105,7 +104,7 @@ function onAcelerometroCall(acelerometroValue) {
         drawLifes();
         drawBall();
         drawPaddle();
-
+        window.plugins.insomnia.keepAwake();
         if ((y + dy) < ballRadius) {
             dy = -dy;
         } else if ((y + dy) > canvas.height - ballRadius) {
