@@ -20,5 +20,6 @@ function onResume(){
    lifes=window.localStorage.getItem("lifes")
 }
 ```
-![lifes](https://raw.githubusercontent.com/gerardoDam2/JuegoDemigranteCordova/master/img/2.jpg)
+![lifes](https://raw.githubusercontent.com/gerardoDam2/JuegoDemigranteCordova/master/img/2.jpg){:height="36px" width="36px"}.
+
 ![gameOver](https://raw.githubusercontent.com/gerardoDam2/JuegoDemigranteCordova/master/img/1.jpg)
