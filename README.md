@@ -20,7 +20,7 @@ function onResume(){
    lifes=window.localStorage.getItem("lifes")
 }
 ```
-- Para evitar que la pantalla se apagara automaticamente durante la partida, he usado la libreria [Insomnia-PhoneGap-Plugin](https://github.com/EddyVerbruggen/Insomnia-PhoneGap-Plugin)
+- Para evitar que la pantalla se apagará automaticamente durante la partida, he usado la libreria [Insomnia-PhoneGap-Plugin](https://github.com/EddyVerbruggen/Insomnia-PhoneGap-Plugin)
 ```sh
 window.plugins.insomnia.keepAwake();
 ```
