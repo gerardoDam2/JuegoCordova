@@ -5,6 +5,14 @@ sale un mensaje "Game Over" indicando que has perdido la partida.
 
 - La aplicación al pasar a segundo plano guarda el estado actual de las vidas.
 ```sh
+document.addEventListener("pause", onAppClose, false);
+function onAppClose(){
+  window.localStorage.setItem("lifes",lifes);
+}
+```
+
+- Al reanudarse la aplicación se reinicia la posición de la bola y se establecen las vidas guardadas en el localStorage.
+```sh
 document.addEventListener('resume', onResume , false);
 function onResume(){
    x = canvas.width / 2;
@@ -12,11 +20,5 @@ function onResume(){
    lifes=window.localStorage.getItem("lifes")
 }
 ```
-
-- Al reanudarse la aplicación se reinicia la posición de la bola y se establecen las vidas guardadas en el localStorage.
-```sh
-document.addEventListener("pause", onAppClose, false);
-function onAppClose(){
-  window.localStorage.setItem("lifes",lifes);
-}
-```
+![lifes](https://raw.githubusercontent.com/gerardoDam2/JuegoDemigranteCordova/master/img/2.jpg)
+![gameOver](https://raw.githubusercontent.com/gerardoDam2/JuegoDemigranteCordova/master/img/1.jpg)
