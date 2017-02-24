@@ -5,9 +5,11 @@ var app = {
 
     onDeviceReady: function() {
         initApp();
-        document.addEventListener('resume', initBall , false);
+        document.addEventListener('resume', onResume , false);
         document.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
         screen.lockOrientation('portrait');
+  //      document.addEventListener("pause", onAppClose, false);
+
     }
 };
 
@@ -81,10 +83,13 @@ function gameOver() {
 
 }
 
-function initBall(){
+function onResume(){
    x = canvas.width / 2;
    y = 20;
    lifes=window.localStorage.getItem("lifes")
+}
+function onAppClose(){
+  window.localStorage.setItem("lifes",lifes);
 }
 
 
@@ -122,9 +127,12 @@ function onAcelerometroCall(acelerometroValue) {
             dx = -dx;
         }
         if (acelerometroValue.x > 0 && paddleX > 0) {
-            paddleX += -1 * (acelerometroValue.x * 1.2);
+           paddleX += -1 * (acelerometroValue.x * 1.2);
+
         } else if (acelerometroValue.x < 0 && paddleX < canvas.width - paddleWidth) {
-            paddleX -= (acelerometroValue.x * 1.2);
+           paddleX -= (acelerometroValue.x * 1.2);
+
+
         }
         x += dx;
         y += dy;
