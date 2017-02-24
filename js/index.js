@@ -9,7 +9,7 @@ var app = {
         document.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
         screen.lockOrientation('portrait');
   //      document.addEventListener("pause", onAppClose, false);
-
+        window.plugins.insomnia.keepAwake();
     }
 };
 
