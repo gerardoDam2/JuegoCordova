@@ -5,6 +5,7 @@ var app = {
 
     onDeviceReady: function() {
         initApp();
+        document.addEventListener('resume', initBall , false);
         document.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
         screen.lockOrientation('portrait');
     }
@@ -33,8 +34,7 @@ var ballRadius = 10;
 var paddleWidth = 75;
 var paddleHeight = 10;
 var paddleX = (canvas.width - paddleWidth) / 2;
-//var lifes = window.localStorage.getItem("lifes")!=null?window.localStorage.getItem("lifes"):3;
-var lifes = 3;
+var lifes = window.localStorage.getItem("lifes")!=null?window.localStorage.getItem("lifes"):3;
 
 var isGameOver = false;
 var esperar=0;
@@ -80,6 +80,14 @@ function gameOver() {
     ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
 
 }
+
+function initBall(){
+   x = canvas.width / 2;
+   y = 20;
+   lifes=window.localStorage.getItem("lifes")
+}
+
+
 function onAcelerometroCall(acelerometroValue) {
     if (isGameOver){
       esperar++;
@@ -99,15 +107,15 @@ function onAcelerometroCall(acelerometroValue) {
             if (x > paddleX && x < paddleX + paddleWidth) {
                 dy = -dy;
             } else {
-                lifes -= 1;
-            //    window.localStorage.setItem("lifes",lifes);
+                lifes-=1;
                 x = 1 + ballRadius;
                 y = 1 + ballRadius;
-                if (lifes == 0) {
+                if (lifes <= 0) {
                     lifes = 3;
                     esperar=0;
                     gameOver();
                 }
+                window.localStorage.setItem("lifes",lifes);
             }
         }
         if (((x + dx) > canvas.width - ballRadius) || ((x + dx) < ballRadius)) {
