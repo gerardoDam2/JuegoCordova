@@ -5,17 +5,19 @@ var app = {
 
     onDeviceReady: function() {
         initApp();
+        document.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
+        screen.lockOrientation('portrait');
     }
 };
 
 app.initialize();
 
 
-// variables
+
 var acelerometro;
 var canvas = document.getElementById("myCanvas");
-canvas.width = window.screen.width - 10;
-canvas.height = window.screen.height - 60;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight-60;
 var ctx = canvas.getContext("2d");
 
 //cordenadas de la bola
@@ -31,8 +33,9 @@ var ballRadius = 10;
 var paddleWidth = 75;
 var paddleHeight = 10;
 var paddleX = (canvas.width - paddleWidth) / 2;
-
+//var lifes = window.localStorage.getItem("lifes")!=null?window.localStorage.getItem("lifes"):3;
 var lifes = 3;
+
 var isGameOver = false;
 var esperar=0;
 
@@ -59,7 +62,6 @@ function drawPaddle() {
 }
 
 function drawLifes() {
-  //  ctx.font = canvas.width + "px Arial";
     ctx.font = "200px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline="midle"
@@ -78,19 +80,14 @@ function gameOver() {
     ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
 
 }
-
-
 function onAcelerometroCall(acelerometroValue) {
     if (isGameOver){
       esperar++;
-      if (esperar==500) {
+      if (esperar==50) {
         isGameOver=false;
       }
     }
-
      else{
-
-
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawLifes();
         drawBall();
@@ -103,24 +100,23 @@ function onAcelerometroCall(acelerometroValue) {
                 dy = -dy;
             } else {
                 lifes -= 1;
+            //    window.localStorage.setItem("lifes",lifes);
                 x = 1 + ballRadius;
                 y = 1 + ballRadius;
                 if (lifes == 0) {
                     lifes = 3;
                     esperar=0;
                     gameOver();
-
                 }
-
             }
         }
         if (((x + dx) > canvas.width - ballRadius) || ((x + dx) < ballRadius)) {
             dx = -dx;
         }
         if (acelerometroValue.x > 0 && paddleX > 0) {
-            paddleX += -1 * (acelerometroValue.x * 1.8);
+            paddleX += -1 * (acelerometroValue.x * 1.2);
         } else if (acelerometroValue.x < 0 && paddleX < canvas.width - paddleWidth) {
-            paddleX -= (acelerometroValue.x * 1.8);
+            paddleX -= (acelerometroValue.x * 1.2);
         }
         x += dx;
         y += dy;
